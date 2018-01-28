@@ -3,9 +3,9 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Router from 'vue-router'
-import store from '@/assets/js/store'
-import ELEMENT from 'element-ui'
+import store from '././store'
 import router from '././router'
+import ELEMENT from 'element-ui'
 import httpRequest from '@/assets/js/httpRequest'
 import '@/assets/css/common.css'
 import "@/assets/lib/xenon-ui/bootstrap.css"
@@ -15,13 +15,10 @@ import "@/assets/lib/xenon-ui/xenon-components.css"
 import "@/assets/css/icons.css"
 import "@/assets/css/animate.min.css"
 
-/*import Filter  from './Filter'*/
-/*console.log(Filter.replace(' vue-re ource',' '));*/
 Vue.use(Router)
-Vue.use(Vuex)
 Vue.use(ELEMENT)
 //命名一个空的VUE实例，用于在难以获取到VUE对象时候使用。
-window.vm = new Vue();
+//window.vm = new Vue();
 
 //验证是否登录
 httpRequest.getUserAccount();

@@ -1,7 +1,7 @@
 import $ from 'jquery'
 import router from '../../router'
 import axios from 'axios'
-import store from '@/assets/js/store'
+import store from '../../store'
 
 function httpRequest() {}
 //验证是否登录
@@ -31,14 +31,14 @@ httpRequest.prototype.getUserAccountYes = function() {
 }
 //获取用户权限
 httpRequest.prototype.getUserPermissions = function() {
-	axios.get('/echarts/examples/data/asset/data/lines-bus.json').then(function(response) {
+	/*axios.get('/echarts/examples/data/asset/data/lines-bus.json').then(function(response) {
 			console.log('获取用户权限');
 			//console.log(response);
 			return response;
 		})
 		.catch(function(error) {
 			console.log(error);
-		});
+		});*/
 }
 
 /*httpRequest.prototype.httpRequestInit = function() {

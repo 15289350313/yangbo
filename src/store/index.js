@@ -68,31 +68,30 @@ var store = new Vuex.Store({
 	//actions针对mutations里的方法进行提交，改变state中的数据
 	mutations: {
 		//改变路由面包屑信息
-		ROUTER_ROUTERNAME: function(state, val) {
+		ROUTER_ROUTERNAME(state, val) {
 			state.router.routerName = val;
 		},
 		//改变路由选中状态
-		ROUTER_ROUTERNAMEEN: function(state, val) {
+		ROUTER_ROUTERNAMEEN(state, val) {
 			state.router.routerNameEn = val;
 		},
 		//改变路由选中父亲状态
-		ROUTER_ACTIVENAME: function(state, val) {
+		ROUTER_ACTIVENAME(state, val) {
 			state.router.activeName = val;
 		},
 		//改变主题
-		ELE_THEME_ACTIVE: function(state, val) {
+		ELE_THEME_ACTIVE(state, val) {
 			state.ELE_Theme_active = val;
 		},
 		//改变用户信息
-		ELE_ELE_USER: function(state, val) {
-			console.log(val);
+		ELE_ELE_USER(state, val) {
 			state.ELE_User = val;
 		},
 	},
 	actions: {
 		//新版本通知消息
-		ELE_message: function(context) {
-			vm.$notify({
+		ELE_message(context) {
+			this._vm.$notify({
 				title: '欢迎你朋友！',
 				message: '作者在elementUi基础上开发的Admin系统',
 				position: 'bottom-right',
@@ -100,19 +99,19 @@ var store = new Vuex.Store({
 			});
 		},
 		//提交路由选中状态
-		router_routername: function(context, val) {
+		router_routername(context, val) {
 			context.commit("ROUTER_ROUTERNAME", val);
 		},
 		//提交路由选中状态
-		router_routerNameEn: function(context, val) {
+		router_routerNameEn(context, val) {
 			context.commit("ROUTER_ROUTERNAMEEN", val);
 		},
 		//提交路由选中父亲状态
-		router_activeName: function(context, val) {
+		router_activeName(context, val) {
 			context.commit("ROUTER_ACTIVENAME", val);
 		},
 		//提交改变主题
-		ELE_Theme_active: function(context, val) {
+		ELE_Theme_active(context, val) {
 			context.commit("ELE_THEME_ACTIVE", val);
 		},
 	}

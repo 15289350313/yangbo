@@ -17,33 +17,26 @@
 </template>
 <script>
 	import Vue from 'vue'
-	import Router from 'vue-router'
-	import VueResource from 'vue-resource'
-	import store from '@/assets/js/store'
 	import ELEMENT from 'element-ui'
-	import axios from 'axios'
 	import httpRequest from '@/assets/js/httpRequest'
-	Vue.use(VueResource)
-	Vue.use(ELEMENT)
 	export default {
-		mounted: function() {},
 		computed: {
 
 		},
 		watch: {
 			$route(to, from) {
 				//左侧导航状态与顶部导航面包屑
-				store.dispatch("router_routername", to.meta.title);
-				store.dispatch("router_routerNameEn", to.meta.openNames);
-				store.dispatch("router_activeName", to.meta.activeName);
+				this.$store.dispatch("router_routername", to.meta.title);
+				this.$store.dispatch("router_routerNameEn", to.meta.openNames);
+				this.$store.dispatch("router_activeName", to.meta.activeName);
 				this.scrollTo();
 			}
 		},
 		mounted() {
 			//左侧导航状态与顶部导航面包屑
-			store.dispatch("router_routername", this.$route.meta.title);
-			store.dispatch("router_routerNameEn", this.$route.meta.openNames);
-			store.dispatch("router_activeName", this.$route.meta.activeName);
+			this.$store.dispatch("router_routername", this.$route.meta.title);
+			this.$store.dispatch("router_routerNameEn", this.$route.meta.openNames);
+			this.$store.dispatch("router_activeName", this.$route.meta.activeName);
 			this.scrollTo();
 		},
 		methods: {

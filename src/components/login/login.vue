@@ -30,8 +30,6 @@
 	</div>
 </template>
 <script>
-	import router from '../../router'
-	import store from '@/assets/js/store'
 	export default {
 		data: function() {
 			return {
@@ -55,12 +53,12 @@
 				this.$refs[formName].validate((valid) => {
 					if(valid) {
 						//验证用户名是否正确
-						if(this.ruleForm.name == store.state.ELE_User.userName){
+						if(this.ruleForm.name == this.$store.state.ELE_User.userName){
 							//推送版本消息
-							store.dispatch("ELE_message");
+							this.$store.dispatch("ELE_message");
 							//储存用户名
 							localStorage.userName = this.ruleForm.name;
-							router.push({ path: 'index' })
+							this.$router.push({ path: 'index' })
 						}else{
 							this.$message.error('密码错误');
 						}

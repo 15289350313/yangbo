@@ -77,10 +77,7 @@
 <script>
 	import Vue from 'vue'
 	import Vuex from 'vuex'
-	import router from '../../router'
-	import store from '@/assets/js/store'
 	import ELEMENT from 'element-ui'
-	Vue.use(ELEMENT)
 	Vue.use(Vuex)
 	export default {
 		data: function() {
@@ -91,19 +88,19 @@
 		},
 		computed: {
 			theme: function() {
-				return store.state.ELE_Theme_active.theme
+				return this.$store.state.ELE_Theme_active.theme
 			},
 			activeName: function() {
-				return store.state.router.activeName
+				return this.$store.state.router.activeName
 			},
 			scrollbarClass: function() {
-				return store.state.toggleCollapse.isCollapsed ? 'el-menu--collapse' : 'el-w200'
+				return this.$store.state.toggleCollapse.isCollapsed ? 'el-menu--collapse' : 'el-w200'
 			},
 			asideClass: function() {
-				return store.state.toggleCollapse.isCollapsed ? 'el-menu--collapse' : 'el-w200'
+				return this.$store.state.toggleCollapse.isCollapsed ? 'el-menu--collapse' : 'el-w200'
 			},
 			isCollapse: function() {
-				return store.state.toggleCollapse.isCollapsed
+				return this.$store.state.toggleCollapse.isCollapsed
 			},
 		},
 		methods: {

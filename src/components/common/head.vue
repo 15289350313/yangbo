@@ -1,18 +1,18 @@
 <template>
 	<div class="layout-header-bar">
-		<div class="align-items-center cursor-pointer float-l margin-r-20" @click="collapsedSider" :class="rotateIcon" style="height: 61px;line-height: 61px;"><i class="ivu-icon-navicon" style="font-size: 32px;"></i></div>
+		<div class="align-items-center cursor-pointer float-l margin-r-20" @click="collapsedSider" :class="rotateIcon" style="height: 61px;line-height: 61px;"><i class="ivu-icon-navicon headerIcon" style="font-size: 32px;"></i></div>
 		<el-breadcrumb class="float-l" separator="/">
 			<template v-for="item in routerHash">
 				<el-breadcrumb-item style="line-height: 62px !important;">{{item}}</el-breadcrumb-item>
 			</template>
 		</el-breadcrumb>
 		<div class="float-r color10">
-			<div class="headertor-con align-items-center float-l"><i class="ivu-icon-arrow-expand" style="font-size: 23px;"></i></div>
-			<div class="headertor-con align-items-center float-l"><i class="ivu-icon-locked" style="font-size: 20px;"></i></div>
-			<div class="headertor-con align-items-center float-l"><i class="ivu-icon-ios-bell" style="font-size: 23px;"></i></div>
+			<div class="headertor-con align-items-center float-l"><i class="ivu-icon-arrow-expand headerIcon" style="font-size: 23px;"></i></div>
+			<div class="headertor-con align-items-center float-l"><i class="ivu-icon-locked headerIcon" style="font-size: 20px;"></i></div>
+			<div class="headertor-con align-items-center float-l"><i class="ivu-icon-ios-bell headerIcon" style="font-size: 23px;"></i></div>
 			<div class="headertor-con align-items-center float-l">
 				<el-dropdown @command="handleCommand" style="height: 30px;">
-					<span class="el-dropdown-link"><i class="ivu-icon-paintbucket color10 margin-r-0" style="font-size: 23px;top: 1px; position: relative;"></i><i class="el-icon-arrow-down el-icon--right"></i></span>
+					<span class="el-dropdown-link"><i class="ivu-icon-paintbucket color10 margin-r-0 headerIcon" style="font-size: 23px;top: 1px; position: relative;"></i><i class="el-icon-arrow-down el-icon--right"></i></span>
 					<el-dropdown-menu slot="dropdown">
 						<template v-for="item in ELE_Theme">
 							<el-dropdown-item :command="item" :class="ELE_Theme_active.theme == item.theme?'bgcolor21':''" style="line-height: 36px;">
@@ -39,8 +39,6 @@
 <script>
 	import Vue from 'vue'
 	import Vuex from 'vuex'
-	import router from '../../router'
-	import store from '@/assets/js/store'
 	import ELEMENT from 'element-ui'
 	Vue.use(ELEMENT)
 	Vue.use(Vuex)
@@ -49,22 +47,24 @@
 			return {}
 		},
 		mounted() {
-
+			if(localStorage.ELE_Theme_active){
+				this.$store.dispatch("ELE_Theme_active",JSON.parse(localStorage.ELE_Theme_active));
+			}
 		},
 		computed: {
 			ELE_Theme_active() {
-				return store.state.ELE_Theme_active;
+				return this.$store.state.ELE_Theme_active;
 			},
 			ELE_Theme() {
-				return store.state.ELE_Theme;
+				return this.$store.state.ELE_Theme;
 			},
 			routerHash() {
-				return store.state.router.routerName;
+				return this.$store.state.router.routerName;
 			},
 			rotateIcon() {
 				return [
 					'menu-icon',
-					store.state.toggleCollapse.isCollapsed ? 'rotate-90deg' : ''
+					this.$store.state.toggleCollapse.isCollapsed ? 'rotate-90deg' : ''
 				];
 			}
 		},
@@ -75,18 +75,18 @@
 					message: '主题“' + command.name + '”设置成功',
 					type: 'success'
 				});
-				console.log(store);
-				//store.state.ELE_Theme_active = command;
-				store.dispatch("ELE_Theme_active", command);
+				//储存主题
+				localStorage.ELE_Theme_active = JSON.stringify(command);
+				this.$store.dispatch("ELE_Theme_active", command);
 			},
 			//左侧菜单状态
 			collapsedSider() {
-				store.state.toggleCollapse.isCollapsed = !store.state.toggleCollapse.isCollapsed
+				this.$store.state.toggleCollapse.isCollapsed = !this.$store.state.toggleCollapse.isCollapsed
 			},
 			//点击头像下拉菜单返回登陆页
 			userDropdown(command) {
 				localStorage.removeItem('userName');
-		        router.push({ path: 'login' })
+		        this.$router.push({ path: 'login' })
 		    }
 		}
 	}
@@ -104,6 +104,10 @@
 	.layout-header-bar .headertor-con {
 		height: 61px;
 		padding: 0 12px;
+		cursor: pointer;
+	}
+	.layout-header-bar .headerIcon:hover{
+		color: #2d8cf0 !important;
 	}
 	
 	.layout-header-bar .ivu-avatar {
